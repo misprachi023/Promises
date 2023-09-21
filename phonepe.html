@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+     font-family: Arial, sans-serif;
+     /* display: flex; */
+     /* justify-content: center; */
+     align-items: center;
+     height: 100vh;
+    }
+    .cont{
+      text-align: center;
+    }
+    .processing {
+      display: none;
+      color: orange;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .success {
+      display: none;
+      color: green;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .failure {
+      display: none;
+      color: red;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .cont>button{
+      color: blue;
+      font-size: 30px;
+      font-weight: bolder;
+      text-align: center;
+    }
+    #img {
+        height: 200px;
+        display: block;
+        margin: auto;
+        /* margin-bottom: 70%; */
+        margin-left: 10px;
+      }
+      div>button {
+        cursor: pointer;
+        padding: 5px;
+        border: 2px solid gray;
+        font-size: 30px;
+        
+      }
+      #inp {
+        padding: 10px;
+        font-weight: bold;
+        border: 2px solid gray;
+      }
+  </style>
+</head>
+<body>
+  <img src="" alt="" />
+  <img
+    id="img"
+    src ="https://1000logos.net/wp-content/uploads/2022/11/PhonePe-Logo.png" alt=""
+  />
+  <div id="main">
+    <label for="inp">Enter Amount : </label>
+    <input
+      type="number"
+      name=""
+      id="inp"
+      placeholder="Enter Amount (in rupees)"
+    />
+  </div>
+  <div class="cont">
+     <div id="processingUI" class="processing"> Processing Payment...</div>
+    <div id="successUI" class="success">Payment Successful!</div>
+    <div id="failureUI" class="failure">Payment Failed. Please try again.</div>
+     <div><button onclick="processPayment()">Pay</button></div>
+     <h3 style="color:red" id="alert"></h3>
+  </div>
+  <script>
+    //  let image = document.querySelector("img");
+    let amount=25000;
+      let input = document.getElementById("inp");
+      let phonepebtn = document.getElementById("#pay"); 
+      let image = document.querySelector("img");
+      let flag=flase;
+    // let amount = 25000
+    function simulateProcessing() {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+        //   const success = Math.random() < 0.5;
+          // if (input.value <=25000) {
+          //   resolve();}
+          // } else if(input.value ==0){
+          //   alert(Please select right amount) 
+          // }
+          // else if(input.value==""){
+          //   alert(Please select amount) 
+          // }
+          // else {
+           
+           if(input.value<=25000) resolve()
+            else reject();
+          // }
+        }, 3000);
+      }
+    )}
+    function showProcessingUI() {
+      document.getElementById('processingUI').style.display = 'block';
+      document.getElementById('successUI').style.display = 'none';
+      document.getElementById('failureUI').style.display = 'none';
+    }
+    function showSuccessUI() {
+      document.getElementById('successUI').style.display = 'block';
+      document.getElementById('processingUI').style.display = 'none';
+      document.getElementById('failureUI').style.display = 'none';
+    }
+    function showFailureUI() {
+      document.getElementById('failureUI').style.display = 'block';
+      document.getElementById('processingUI').style.display = 'none';
+      document.getElementById('successUI').style.display = 'none';
+    }
+    function processPayment() {
+      if(input.value>0){
+        
+        document.getElementById("alert").innerText="";
+        document.getElementById("alert").innerText="";
+      showProcessingUI();
+      simulateProcessing()
+        .then(() => {
+          // Payment successful
+          showSuccessUI();
+          
+
+        })
+        .catch(() => {
+          // Payment failed 
+          showFailureUI(); 
+        });
+      }
+      else if(input.value<0) 
+            {
+              document.getElementById("alert").innerText=`please enter some  valid amount`;
+              document.getElementById('processingUI').style.display = 'none';
+              document.getElementById('failureUI').style.display = 'none';
+              document.getElementById('successUI').style.display = 'none';
+            }
+      else 
+      {
+        document.getElementById("alert").innerText=`please enter some amount`; 
+        document.getElementById('processingUI').style.display = 'none';
+        document.getElementById('failureUI').style.display = 'none';
+        document.getElementById('successUI').style.display = 'none';
+      } 
+    }
+  </script>  
+</body>
+</html>
